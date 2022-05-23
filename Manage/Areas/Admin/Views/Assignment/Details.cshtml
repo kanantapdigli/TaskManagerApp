@@ -1,0 +1,85 @@
+﻿@using Manage.Areas.Admin.Models.Assignment
+@model AssignmentDetailsViewModel
+<!-- Page Wrapper -->
+<div id="wrapper">
+    @await Html.PartialAsync("_SidebarPartial")
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            @await Html.PartialAsync("_TopbarPartial")
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="card shadow mb-4">
+                    <div class="card-header main-background py-3 d-flex align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-white">Task Details</h6>
+                        <div>
+                            <a asp-action="index" asp-controller="assignment" class="btn btn-primary">Back to List</a>
+                            <a asp-action="edit" asp-controller="assignment" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div class="row main-color">
+                                <div class="col-12 my-5">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Title)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.DisplayFor(model => model.Title)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 my-5">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Description)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.DisplayFor(model => model.Description)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 my-5">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.DisplayFor(model => model.Status)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Deadline)
+                                        </div>
+                                        <div class="col-6">
+                                             @Model.Deadline.ToShortDateString()
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 my-5">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Staffs)
+                                        </div>
+                                        <div class="col-6">
+                                            @foreach (var staff in Model.Staffs)
+                                            {
+                                                <p>@staff.Fullname</p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

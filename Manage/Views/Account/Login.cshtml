@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Staff Login";
+}
+
+@using Manage.Models.Account
+@model AccountLoginViewModel
+
+
+<!-- login section starts -->
+<section class="login">
+        <div class="row">
+            <div class="col-12 d-flex align-items-center justify-content-center">
+                <div class="loginn">
+                    <div class="text-center log-title">
+                        Staff Login
+                    </div>
+                    <form asp-action="login" asp-controller="account" method="post" class="mt-5">
+                        <div class="form-group">
+                            <input asp-for="Email" type="text" class="log-item w-100" placeholder="Email">
+                            <span asp-validation-for="Email" class="validate-message d-inline-block py-2 text-danger"></span>
+                        </div>
+                        <div class="form-group mb-0">
+                            <input asp-for="Password" type="password" class="log-item w-100" placeholder="Password">
+                            <span asp-validation-for="Password" class="validate-message d-inline-block py-2 text-danger"></span>
+                        </div>
+                        <div class="form-group text-center mt-4">
+                            <input type="submit" class="btn border px-5 py-2" value="Login">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</section>
+<!-- login section ends -->
+
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

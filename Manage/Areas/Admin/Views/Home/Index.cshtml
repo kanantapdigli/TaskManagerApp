@@ -1,0 +1,29 @@
+﻿@using Manage.Areas.Admin.Models.Home
+@model HomeIndexViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    @await Html.PartialAsync("_SidebarPartial")
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            @await Html.PartialAsync("_TopbarPartial")
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="card shadow mb-4">
+                    <div class="card-header main-background py-3">
+                        <h6 class="m-0 font-weight-bold text-white">Organization</h6>
+                    </div>
+                    <div class="card-body d-flex justify-content-center">
+                        <h1 class="py-5">@Model.OrganizationName.ToUpperInvariant()</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,106 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.main-background {
+    background-color: #3F8CFF;
+}
+
+.login {
+    background: #ddffd6;
+    background: linear-gradient(0deg, #ddffd6 0%, #26ae61 100%);
+    padding: 50px 0;
+    min-height: 100vh;
+}
+
+    .login .loginn {
+        padding: 40px 50px;
+        width: 750px;
+        background-color: white;
+        border-radius: 10px;
+    }
+
+        .login .loginn .log-title {
+            font-size: 25px;
+        }
+
+        .login .loginn .log-item {
+            width: 100%;
+            border-radius: 10px;
+            border: 2px solid black;
+            outline: none;
+            transition: 0.3s all linear;
+            padding: 12px;
+        }
+
+            .login .loginn .log-item:hover, .login .loginn .log-item:focus {
+                border: 2px solid #26AE61;
+                -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.75);
+                -moz-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.75);
+                box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.75);
+            }
+
+        .login .loginn .log-submit {
+            box-shadow: none;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 250px;
+        }
+
+       

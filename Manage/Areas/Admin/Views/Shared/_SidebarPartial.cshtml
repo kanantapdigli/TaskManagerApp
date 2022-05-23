@@ -1,0 +1,27 @@
+﻿<!-- Sidebar -->
+<ul class="navbar-nav main-background sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center">
+        <div class="sidebar-brand-text mx-3 text-white">
+            TASK MANAGER
+        </div>
+    </a>
+
+         <li class="nav-item">
+            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "home" ? "text-white" : "")" href="/admin">
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "staff" ? "text-white" : "")" href="/admin/staff">
+                <span>Staffs</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "assignment" ? "text-white" : "")" href="/admin/assignment">
+                <span>Tasks</span>
+            </a>
+        </li>
+</ul>
+<!-- End of Sidebar -->
