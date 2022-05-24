@@ -1,9 +1,10 @@
 # TaskManagerApp
 
 #Technologies
-C#
-ASP.NET
-MS SQL
+1. C#
+2. ASP.NET Core
+3. EF Core
+4. MS SQL
 
 #Access URLs
 1. For Organization Registration URL = /admin/account/register
