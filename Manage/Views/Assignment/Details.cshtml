@@ -1,0 +1,63 @@
+﻿@using Manage.Models.Assignment
+@model AssignmentDetailsViewModel
+
+
+<div class="container py-5">
+    <div class="row">
+        <h1 class="text-center w-100">Task details</h1>
+        <div class="col-12 my-5">
+            <div class="row">
+                <div class="col-6 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.Title)
+                </div>
+                <div class="col-6">
+                    @Html.DisplayFor(model => model.Title)
+                </div>
+            </div>
+        </div>
+        <div class="col-12 my-5">
+            <div class="row">
+                <div class="col-6 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.Description)
+                </div>
+                <div class="col-6">
+                    @Html.DisplayFor(model => model.Description)
+                </div>
+            </div>
+        </div>
+        <div class="col-12 my-5">
+            <div class="row">
+                <div class="col-6 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.Status)
+                </div>
+                <div class="col-6">
+                    @Html.DisplayFor(model => model.Status)
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-6 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.Deadline)
+                </div>
+                <div class="col-6">
+                    @Model.Deadline.ToShortDateString()
+                </div>
+            </div>
+        </div>
+        <div class="col-12 my-5">
+            <div class="row">
+                <div class="col-6 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.Staffs)
+                </div>
+                <div class="col-6">
+                    @foreach (var staff in Model.Staffs)
+                    {
+                        <p>@staff.Fullname</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,6 +1,8 @@
 using Core.DataAccess;
 using Core.Entities;
 using Core.Services.Abstractions;
+using Core.Services.Notification.Email.Abstraction;
+using Core.Services.Notification.Email.Configuration.SMTP;
 using DataAccess;
 using DataAccess.Contexts;
 using FluentValidation.AspNetCore;
@@ -13,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.Implementations;
+using Services.Notification.Email.Implementation.SMTP;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,6 +87,14 @@ namespace Manage
 
             #endregion
 
+            #region SMTP    
+
+            var smtpConfiguration = Configuration.GetSection("SMTPConfiguration").Get<SMTPConfiguration>();
+            services.AddSingleton(smtpConfiguration);
+            services.AddTransient<IEmailService, SMTPService>();
+
+            #endregion
+
             #region FluentValidation
 
             services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
@@ -122,7 +133,7 @@ namespace Manage
                 routes.MapRoute(
                    name: "default",
                    template: "{controller}/{action}/{id?}",
-                   defaults: new { controller = "home", action = "index" }
+                   defaults: new { controller = "assignment", action = "index" }
                );
             });
         }

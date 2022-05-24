@@ -18,5 +18,6 @@ namespace Core.Services.Abstractions
         Task<List<Assignment>> GetAllByDescendingWithStaffsAsync();
         Task<List<string>> GetStaffIdsAsync(int assignmentId);
         Task<Assignment> GetWithStaffsAsync(int assignmentId);
+        Task<List<Assignment>> GetAllByOrganizationWithStaffsAsync(int organizationId);
     }
 }

@@ -16,5 +16,7 @@ namespace Core.DataAccess.Abstractions
         Task<List<string>> GetStaffIdsAsync(int assignmentId);
 
         Task<Assignment> GetWithStaffsAsync(int assignmentId);
+
+        Task<List<Assignment>> GetAllByOrganizationWithStaffsAsync(int organizationId);
     }
 }

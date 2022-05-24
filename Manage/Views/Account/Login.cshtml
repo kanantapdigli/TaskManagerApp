@@ -23,6 +23,7 @@
                             <input asp-for="Password" type="password" class="log-item w-100" placeholder="Password">
                             <span asp-validation-for="Password" class="validate-message d-inline-block py-2 text-danger"></span>
                         </div>
+                        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
                         <div class="form-group text-center mt-4">
                             <input type="submit" class="btn border px-5 py-2" value="Login">
                         </div>

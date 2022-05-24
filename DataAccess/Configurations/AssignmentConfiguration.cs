@@ -16,13 +16,19 @@ namespace DataAccess.Configurations
             #region Id
 
             builder
-                .HasKey(t => t.Id);
+                .HasKey(a => a.Id);
 
             #endregion
 
             builder
-                .Property(t => t.Title)
+                .Property(a => a.Title)
                 .IsRequired();
+
+            builder
+                .HasOne(a => a.Organization)
+                .WithMany(o => o.Assignments)
+                .HasForeignKey(a => a.OrganizationId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder
                .ToTable("Assignments");

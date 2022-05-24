@@ -22,6 +22,10 @@ namespace Core.Entities
 
         public ICollection<Staff> Staffs { get; set; }
 
+        public int OrganizationId { get; set; }
+
+        public Organization Organization { get; set; }
+
         #endregion
     }
 }

@@ -865,7 +865,6 @@ C:\Users\Kanan\Desktop\Projects\TaskManagerApp\Manage\obj\Debug\net5.0\staticweb
 C:\Users\Kanan\Desktop\Projects\TaskManagerApp\Manage\obj\Debug\net5.0\Manage.TagHelpers.input.cache
 C:\Users\Kanan\Desktop\Projects\TaskManagerApp\Manage\obj\Debug\net5.0\Manage.TagHelpers.output.cache
 C:\Users\Kanan\Desktop\Projects\TaskManagerApp\Manage\obj\Debug\net5.0\Manage.RazorCoreGenerate.cache
-C:\Users\Kanan\Desktop\Projects\TaskManagerApp\Manage\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\Kanan\Desktop\Projects\TaskManagerApp\Manage\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\Kanan\Desktop\Projects\TaskManagerApp\Manage\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\Kanan\Desktop\Projects\TaskManagerApp\Manage\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
@@ -894,3 +893,10 @@ C:\Users\Kanan\Desktop\Projects\TaskManagerApp\Manage\obj\Debug\net5.0\Razor\Are
 C:\Users\Kanan\Desktop\Projects\TaskManagerApp\Manage\obj\Debug\net5.0\Razor\Areas\Admin\Views\Assignment\Edit.cshtml.g.cs
 C:\Users\Kanan\Desktop\Projects\TaskManagerApp\Manage\obj\Debug\net5.0\Razor\Areas\Admin\Views\Assignment\Details.cshtml.g.cs
 C:\Users\Kanan\Desktop\Projects\TaskManagerApp\Manage\obj\Debug\net5.0\Razor\Views\Account\Login.cshtml.g.cs
+C:\Users\Kanan\Desktop\Projects\TaskManagerApp\Manage\obj\Debug\net5.0\Razor\Views\Assignment\Add.cshtml.g.cs
+C:\Users\Kanan\Desktop\Projects\TaskManagerApp\Manage\obj\Debug\net5.0\Razor\Views\Assignment\Index.cshtml.g.cs
+C:\Users\Kanan\Desktop\Projects\TaskManagerApp\Manage\obj\Debug\net5.0\Razor\Views\Assignment\Details.cshtml.g.cs
+C:\Users\Kanan\Desktop\Projects\TaskManagerApp\Manage\obj\Debug\net5.0\Razor\Views\Assignment\Edit.cshtml.g.cs
+C:\Users\Kanan\Desktop\Projects\TaskManagerApp\Manage\bin\Debug\net5.0\MailKit.dll
+C:\Users\Kanan\Desktop\Projects\TaskManagerApp\Manage\bin\Debug\net5.0\MimeKit.dll
+C:\Users\Kanan\Desktop\Projects\TaskManagerApp\Manage\bin\Debug\net5.0\BouncyCastle.Crypto.dll

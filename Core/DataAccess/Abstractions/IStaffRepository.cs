@@ -19,5 +19,6 @@ namespace Core.DataAccess.Abstractions
         Task<IdentityResult> UpdateWithResultAsync(Staff staff);
         Task<Staff> FindByEmailAsync(string email);
         Task<Staff> GetStaffWithOrganizationAsync(ClaimsPrincipal User);
+        Task<Staff> GetUserAsync(ClaimsPrincipal User);
     }
 }

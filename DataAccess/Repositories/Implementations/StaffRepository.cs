@@ -72,5 +72,10 @@ namespace DataAccess.Repositories.Implementations
                             .Include(s => s.Organization)
                             .FirstOrDefaultAsync(s => s.Id == staff.Id);
         }
+
+        public async Task<Staff> GetUserAsync(ClaimsPrincipal User)
+        {
+            return await _staffManager.GetUserAsync(User);
+        }
     }
 }

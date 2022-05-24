@@ -13,9 +13,15 @@ namespace Core.Entities
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
 
+        #region NavigationProperties
+
         public User Owner { get; set; }
         public string OwnerId { get; set; }
 
         public ICollection<Staff> Staffs { get; set; }
+
+        public ICollection<Assignment> Assignments { get; set; }
+
+        #endregion
     }
 }

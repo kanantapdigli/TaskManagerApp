@@ -35,6 +35,15 @@ namespace DataAccess.Repositories.Implementations
                            .ToListAsync();
         }
 
+        public async Task<List<Assignment>> GetAllByOrganizationWithStaffsAsync(int organizationId)
+        {
+            return await _db.Assignments
+                            .Include(a => a.Staffs)
+                            .Where(a => a.OrganizationId == organizationId)
+                            .OrderByDescending(a => a.Id)
+                            .ToListAsync(); 
+        }
+
         public async Task<List<string>> GetStaffIdsAsync(int assignmentId)
         {
             var assignment = await _db.Assignments
@@ -55,5 +64,6 @@ namespace DataAccess.Repositories.Implementations
                                     .Include(a => a.Staffs)
                                     .FirstOrDefaultAsync(a => a.Id == assignmentId);
         }
+
     }
 }

@@ -45,5 +45,15 @@ namespace Services.Implementations
             await _unitOfWork.Organizations.DeleteAsync(organization);
             await _unitOfWork.CommitAsync();
         }
+
+        public async Task<bool> IsStaffAsync(int organizationId, string staffId)
+        {
+            return await _unitOfWork.Organizations.IsStaffAsync(organizationId, staffId);
+        }
+
+        public async Task<bool> IsOwnerAsync(int organizationId, string userId)
+        {
+            return await _unitOfWork.Organizations.IsOwnerAsync(organizationId, userId);
+        }
     }
 }

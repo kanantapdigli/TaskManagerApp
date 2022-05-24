@@ -13,6 +13,7 @@ namespace Core.Services.Abstractions
     {
         Task<List<Staff>> GetAllAsync();
         Task<Staff> GetAsync(string id);
+        Task<Staff> GetUserAsync(ClaimsPrincipal User);
         Task CreateAsync(Staff staff);
         Task<IdentityResult> CreateAsync(Staff staff, string password);
         Task UpdateAsync(Staff staff);

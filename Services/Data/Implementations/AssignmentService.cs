@@ -65,5 +65,10 @@ namespace Services.Implementations
         {
             return await _unitOfWork.Assignments.GetWithStaffsAsync(assignmentId);
         }
+
+        public async Task<List<Assignment>> GetAllByOrganizationWithStaffsAsync(int organizationId)
+        {
+            return await _unitOfWork.Assignments.GetAllByOrganizationWithStaffsAsync(organizationId);
+        }
     }
 }

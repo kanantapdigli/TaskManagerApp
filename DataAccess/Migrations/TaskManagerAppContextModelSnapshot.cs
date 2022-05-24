@@ -47,6 +47,9 @@ namespace DataAccess.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("OrganizationId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -55,6 +58,8 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OrganizationId");
 
                     b.ToTable("Assignments");
                 });
@@ -369,6 +374,17 @@ namespace DataAccess.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Core.Entities.Assignment", b =>
+                {
+                    b.HasOne("Core.Entities.Organization", "Organization")
+                        .WithMany("Assignments")
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Organization");
+                });
+
             modelBuilder.Entity("Core.Entities.Organization", b =>
                 {
                     b.HasOne("Core.Entities.User", "Owner")
@@ -443,6 +459,8 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Core.Entities.Organization", b =>
                 {
+                    b.Navigation("Assignments");
+
                     b.Navigation("Staffs");
                 });
 

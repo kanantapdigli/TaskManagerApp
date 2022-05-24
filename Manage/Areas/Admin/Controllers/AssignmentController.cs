@@ -1,5 +1,7 @@
 ﻿using Core.Entities;
 using Core.Services.Abstractions;
+using Core.Services.Notification.Email.Abstraction;
+using Core.Services.Notification.Email.Models;
 using Manage.Areas.Admin.Models.Assignment;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,20 +16,32 @@ namespace Manage.Areas.Admin.Controllers
     {
         private readonly IAssignmentService _assignmentService;
         private readonly IStaffService _staffService;
+        private readonly IOrganizationService _organizationService;
+        private readonly IUserService _userService;
+        private readonly IEmailService _emailService;
 
         public AssignmentController(IAssignmentService assignmentService,
-            IStaffService staffService)
+            IStaffService staffService,
+            IOrganizationService organizationService,
+            IUserService userService,
+            IEmailService emailService)
         {
             _assignmentService = assignmentService;
             _staffService = staffService;
+            _organizationService = organizationService;
+            _userService = userService;
+            _emailService = emailService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            var user = await _userService.GetUserWithOrganizationAsync(User);
+            if (user == null) return NotFound();
+
             var model = new AssignmentIndexViewModel
             {
-                Assignments = await _assignmentService.GetAllByDescendingWithStaffsAsync()
+                Assignments = await _assignmentService.GetAllByOrganizationWithStaffsAsync(user.Organization.Id)
             };
 
             return View(model);
@@ -38,9 +52,12 @@ namespace Manage.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
+            var user = await _userService.GetUserWithOrganizationAsync(User);
+            if (user == null) return NotFound();
+
             var model = new AssignmentAddViewModel
             {
-                Staffs = await _staffService.GetAllAsync()
+                Staffs = await _staffService.GetAllByOrganizationAsync(user.Organization.Id)
             };
 
             return View(model);
@@ -51,12 +68,16 @@ namespace Manage.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
+            var user = await _userService.GetUserWithOrganizationAsync(User);
+            if (user == null) return NotFound();
+
             var assignment = new Assignment
             {
                 Title = model.Title,
                 Description = model.Description,
                 Status = model.Status,
-                Deadline = model.Deadline
+                Deadline = model.Deadline,
+                OrganizationId = user.Organization.Id
             };
 
             if (model.StaffIds != null)
@@ -67,6 +88,12 @@ namespace Manage.Areas.Admin.Controllers
                 {
                     var staff = await _staffService.GetAsync(staffId);
                     staffs.Add(staff);
+
+                    await _emailService.SendEmail(new Message
+                        (new List<string> { staff.Email }, 
+                        $"New Task - {assignment.Title}",
+                        $"{assignment.Title} was assigned you by now"
+                        ));
                 }
 
                 assignment.Staffs = staffs;
@@ -86,6 +113,11 @@ namespace Manage.Areas.Admin.Controllers
             var assignment = await _assignmentService.GetAsync(id);
             if (assignment == null) return NotFound();
 
+            var user = await _userService.GetUserWithOrganizationAsync(User);
+            if (user == null) return NotFound();
+
+            if (!await _organizationService.IsOwnerAsync(assignment.OrganizationId, user.Id)) return BadRequest();
+
             var model = new AssignmentEditViewModel
             {
                 Id = assignment.Id,
@@ -93,7 +125,7 @@ namespace Manage.Areas.Admin.Controllers
                 Description = assignment.Description,
                 Status = assignment.Status,
                 Deadline = assignment.Deadline,
-                Staffs = await _staffService.GetAllAsync(),
+                Staffs = await _staffService.GetAllByOrganizationAsync(user.Organization.Id),
                 StaffIds = await _assignmentService.GetStaffIdsAsync(assignment.Id)
             };
 
@@ -108,6 +140,11 @@ namespace Manage.Areas.Admin.Controllers
             var assignment = await _assignmentService.GetWithStaffsAsync(model.Id);
             if (assignment == null) return NotFound();
 
+            var user = await _userService.GetUserAsync(User);
+            if (user == null) return NotFound();
+
+            if (!await _organizationService.IsOwnerAsync(assignment.OrganizationId, user.Id)) return BadRequest();
+
             assignment.Title = model.Title;
             assignment.Description = model.Description;
             assignment.Status = model.Status;
@@ -121,6 +158,12 @@ namespace Manage.Areas.Admin.Controllers
                 {
                     var staff = await _staffService.GetAsync(staffId);
                     staffs.Add(staff);
+
+                    await _emailService.SendEmail(new Message
+                       (new List<string> { staff.Email },
+                       $"New Task - {assignment.Title}",
+                       $"{assignment.Title} was assigned you by now"
+                       ));
                 }
             }
 
@@ -134,10 +177,16 @@ namespace Manage.Areas.Admin.Controllers
 
         #region Details
 
+        [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
             var assignment = await _assignmentService.GetWithStaffsAsync(id);
             if (assignment == null) return NotFound();
+
+            var user = await _userService.GetUserAsync(User);
+            if (user == null) return NotFound();
+
+            if (!await _organizationService.IsOwnerAsync(assignment.OrganizationId, user.Id)) return BadRequest();
 
             var model = new AssignmentDetailsViewModel
             {
@@ -161,6 +210,11 @@ namespace Manage.Areas.Admin.Controllers
         {
             var assignment = await _assignmentService.GetAsync(id);
             if (assignment == null) return NotFound();
+
+            var user = await _userService.GetUserAsync(User);
+            if (user == null) return NotFound();
+
+            if (!await _organizationService.IsOwnerAsync(assignment.OrganizationId, user.Id)) return BadRequest();
 
             await _assignmentService.DeleteAsync(assignment);
             return RedirectToAction("index");

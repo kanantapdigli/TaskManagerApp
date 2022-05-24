@@ -1,6 +1,6 @@
 ﻿using Core.Entities;
 using Core.Services.Abstractions;
-using Manage.Areas.Admin.Models.Account;
+using Manage.Models.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -34,11 +34,18 @@ namespace Manage.Controllers
             if (staff != null)
             {
                 var result = await _signInManager.PasswordSignInAsync(staff, model.Password, false, false);
-                if (result.Succeeded) return RedirectToAction("index", "home");
+                if (result.Succeeded) return RedirectToAction("index", "assignment");
             }
 
             ModelState.AddModelError(string.Empty, "Email or Password is incorrect");
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Signout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("login", "account");
         }
     }
 }

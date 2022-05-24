@@ -14,6 +14,7 @@
                 <div class="row">
                     <div class="col-12">
                         <form asp-action="edit" asp-controller="staff" asp-area="admin" method="post" enctype="multipart/form-data">
+                            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
                             <div class="container">
                                 <div class="row">
                                     <div class="col-12 col-md-6">
@@ -30,7 +31,7 @@
                                             <span asp-validation-for="Email" class="text-danger"></span>
                                         </div>
                                     </div>
-                                     <div class="col-12 col-md-6">
+                                    <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label asp-for="NewPassword" class="control-label main-color"></label>
                                             <input asp-for="NewPassword" class="form-control">
@@ -44,7 +45,7 @@
                                             <span asp-validation-for="ConfirmNewPassword" class="text-danger"></span>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-12 text-center">
                                         <div class="form-group">
                                             <input type="submit" value="Edit" class="btn btn-primary" />
@@ -64,5 +65,7 @@
 
 @section Scripts{
     <!-- validate js -->
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

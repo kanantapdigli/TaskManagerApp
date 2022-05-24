@@ -14,12 +14,15 @@ namespace Manage.Areas.Admin.Controllers
     {
         private readonly IUserService _userService;
         private readonly IStaffService _staffService;
+        private readonly IOrganizationService _organizationService;
 
         public StaffController(IUserService userService,
-            IStaffService staffService)
+            IStaffService staffService,
+            IOrganizationService organizationService)
         {
             _userService = userService;
             _staffService = staffService;
+            _organizationService = organizationService;
         }
 
         [HttpGet]
@@ -87,6 +90,11 @@ namespace Manage.Areas.Admin.Controllers
             var staff = await _staffService.GetAsync(id);
             if (staff == null) return NotFound();
 
+            var owner = await _userService.GetUserAsync(User);
+            if (owner == null) return NotFound();
+
+            if (!await _organizationService.IsOwnerAsync(staff.OrganizationId, owner.Id)) return BadRequest();
+
             var model = new StaffEditViewModel
             {
                 Id = staff.Id,
@@ -104,6 +112,11 @@ namespace Manage.Areas.Admin.Controllers
 
             var staff = await _staffService.GetAsync(model.Id);
             if (staff == null) return NotFound();
+
+            var owner = await _userService.GetUserAsync(User);
+            if (owner == null) return NotFound();
+
+            if (!await _organizationService.IsOwnerAsync(staff.OrganizationId, owner.Id)) return BadRequest();
 
             staff.Fullname = model.Fullname;
             staff.Email = model.Email;
@@ -134,6 +147,11 @@ namespace Manage.Areas.Admin.Controllers
             var staff = await _staffService.GetAsync(id);
             if (staff == null) return NotFound();
 
+            var owner = await _userService.GetUserAsync(User);
+            if (owner == null) return NotFound();
+
+            if (!await _organizationService.IsOwnerAsync(staff.OrganizationId, owner.Id)) return BadRequest();
+
             var model = new StaffDetailsViewModel
             {
                 Id = staff.Id,
@@ -153,6 +171,11 @@ namespace Manage.Areas.Admin.Controllers
         {
             var staff = await _staffService.GetAsync(id);
             if (staff == null) return NotFound();
+
+            var owner = await _userService.GetUserAsync(User);
+            if (owner == null) return NotFound();
+
+            if (!await _organizationService.IsOwnerAsync(staff.OrganizationId, owner.Id)) return BadRequest();
 
             await _staffService.DeleteAsync(staff);
             return RedirectToAction("index");

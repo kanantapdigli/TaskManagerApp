@@ -1,0 +1,51 @@
+﻿@using Manage.Models.Assignment
+@model AssignmentIndexViewModel
+
+<div class="container py-5">
+    <div class="row">
+        <h1 class="text-center w-100">ORGANIZATION : @Model.OrganizationName</h1>
+        <h2 class="text-center w-100">FULLNAME : @Model.Fullname</h2>
+        <h3 class="text-center w-100">EMAIL : @Model.Email</h3>
+        <div class="d-flex w-100 justify-content-center mt-2">
+            <a asp-action="signout" asp-controller="account" class="btn btn-danger text-white" onclick="return confirm('Are you sure to sign out?')">Sign out</a>
+        </div>
+
+        <div class="table-responsive mt-5">
+            <a class="btn btn-primary mb-3" asp-action="add" asp-controller="assignment">Add Task</a>
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="main-color text-center">Title</th>
+                        <th class="main-color text-center">Status</th>
+                        <th class="main-color text-center">Deadline</th>
+                        <th class="main-color text-center">Assigned to</th>
+                        <th class="main-color text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var assignment in Model.Assignments)
+                    {
+                        <tr id="@assignment.Id">
+                            <td class="text-center">@assignment.Title</td>
+                            <td class="text-center">@assignment.Status</td>
+                            <td class="text-center">@assignment.Deadline.ToShortDateString()</td>
+                            <td class="text-center">
+                                @foreach (var staff in assignment.Staffs)
+                                {
+                                    <p>@staff.Fullname</p>
+                                }
+                            </td>
+                            <td class="text-center">
+                                <div class="d-flex justify-content-center">
+                                    <a asp-action="edit" asp-controller="assignment" asp-route-id="@assignment.Id" class="btn btn-primary text-white">Edit</a>
+                                    <a asp-action="details" asp-controller="assignment" asp-route-id="@assignment.Id" class="btn btn-info mx-2 text-white">Details</a>
+                                    <a asp-action="delete" asp-controller="assignment" asp-route-id="@assignment.Id" onclick="return confirm('Are you sure to delete?')" class="btn btn-danger text-white">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

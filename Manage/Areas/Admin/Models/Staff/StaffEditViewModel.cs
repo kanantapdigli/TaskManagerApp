@@ -42,15 +42,22 @@ namespace Manage.Areas.Admin.Models.Staff
             RuleFor(x => x.NewPassword)
                 .NotNull()
                 .NotEmpty()
-                .GreaterThanOrEqualTo("6")
                 .When(x => x.ConfirmNewPassword != null);
+
+            RuleFor(x => x.NewPassword)
+               .Must(x => x.Length >= 6)
+               .When(x => x.NewPassword != null)
+               .WithMessage("Length must be greater than or equals to 6");
 
             RuleFor(x => x.ConfirmNewPassword)
                 .NotNull()
                 .NotEmpty()
-                .GreaterThanOrEqualTo("6")
                 .When(x => x.NewPassword != null);
 
+            RuleFor(x => x.ConfirmNewPassword)
+               .Must(x => x.Length >= 6)
+               .When(x => x.ConfirmNewPassword != null)
+               .WithMessage("Length must be greater than or equals to 6");
 
             RuleFor(x => x)
                 .Must(ComparePasswords)

@@ -14,5 +14,7 @@ namespace Core.Services.Abstractions
         Task CreateAsync(Organization organization);
         Task UpdateAsync(Organization organization);
         Task DeleteAsync(Organization organization);
+        Task<bool> IsStaffAsync(int organizationId, string staffId);
+        Task<bool> IsOwnerAsync(int organizationId, string userId);
     }
 }

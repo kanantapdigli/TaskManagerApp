@@ -87,5 +87,10 @@ namespace Services.Implementations
         {
             return await _unitOfWork.Staffs.GetStaffWithOrganizationAsync(User);
         }
+
+        public async Task<Staff> GetUserAsync(ClaimsPrincipal User)
+        {
+            return await _unitOfWork.Staffs.GetUserAsync(User);
+        }
     }
 }
